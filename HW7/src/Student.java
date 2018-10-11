@@ -1,23 +1,30 @@
 import java.util.ArrayList;
 public class Student {
+	
 	// Storing Student Names
 	ArrayList<String> names;
+	
 	// 2D Array for marks
 	double[][] marks;
 	
+	// 2D Array for grades
 	char[][] grades;
 	
 	// Constructer calling
 	Student(int length,int test)
 	{
+		// Allocating Memmory
 		names = new ArrayList<String>(length);
 		grades = new char[length][];
 		marks = new double[length][];
+		
 		for(int i=0;i<length;i++)
 		{
 			marks[i] = new double[test];
 			grades[i] = new char[test];
 		}
+		
+		// Intializing Values
 		for(int i=0; i<length; i++)
 		{
 			for(int j=0; j<test; j++)
@@ -27,6 +34,8 @@ public class Student {
 			}
 		}
 	}
+	
+	// returns the index of Student
 	private int getIndex(String Name)
 	{
 		for(int i=0; i<names.size();i++)
@@ -36,8 +45,13 @@ public class Student {
 				return i;
 			}
 		}
+		
+		// if not present
 		return -1;
 	}
+	
+	// insert marks to the student name
+	// sets the grade accordingly
 	void insertMarks(String studentName,double mark)
 	{
 		int index = getIndex(studentName);
@@ -51,6 +65,8 @@ public class Student {
 		}
 		return;
 	}
+	
+	// funnction to set grade
 	private void setGrade(int index,double mark)
 	{
 		char grade = 'F';
@@ -61,10 +77,14 @@ public class Student {
 		if(mark >= 0 && mark <= 59) grade = 'F';
 		insertGrade(index,grade);
 	}
+	
+	// Validity check on student
 	private boolean isValid(int index)
 	{
 		return index < names.size();
 	}
+	
+	// Inserts grade
 	private void insertGrade(int index,char grade)
 	{
 		if(!isValid(index)) return;
@@ -78,6 +98,8 @@ public class Student {
 		}
 		return;
 	}
+	
+	// return Average
 	public double getAverage(int index)
 	{
 		if(!isValid(index)) return -1;
